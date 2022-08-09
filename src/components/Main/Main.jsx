@@ -1,1 +1,15 @@
-rs
+import React from 'react';
+import './Main.css';
+import Header from '../Header/Header';
+import Promo from '../Promo/Promo';
+
+function Main() {
+  return (
+    <div className="main">
+      <Header />
+      <Promo />
+    </div>
+  );
+}
+
+export default Main;
