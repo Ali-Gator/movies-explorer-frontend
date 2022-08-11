@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import './portfolio.css';
 
 function Portfolio() {
@@ -8,19 +7,19 @@ function Portfolio() {
       <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__list'>
         <li>
-          <NavLink to='/signup' className='portfolio__item'>
+          <a className='portfolio__item' href='https://ali-gator.github.io/portfolio/'>
             Статичный сайт
-          </NavLink>
+          </a>
         </li>
         <li>
-          <NavLink to='/signup' className='portfolio__item'>
+          <a className='portfolio__item' href='https://ali-gator.github.io/russian-travel/'>
             Адаптивный сайт
-          </NavLink>
+          </a>
         </li>
         <li>
-          <NavLink to='/signup' className='portfolio__item'>
+          <a className='portfolio__item' href='https://ali-gator.github.io/mesto/'>
             Одностраничное приложение
-          </NavLink>
+          </a>
         </li>
       </ul>
     </section>

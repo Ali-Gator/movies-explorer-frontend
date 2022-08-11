@@ -1,6 +1,5 @@
 import React from 'react';
 import './aboutMe.css';
-import { NavLink } from 'react-router-dom';
 import mePhoto from '../../images/me.png';
 
 function AboutMe() {
@@ -18,14 +17,14 @@ function AboutMe() {
         </p>
         <ul className='about-me__links'>
           <li>
-            <NavLink to='/signup' className='about-me__link-item'>
+            <a className='about-me__link-item' href='https://www.facebook.com/oleg.gordienov'>
               Facebook
-            </NavLink>
+            </a>
           </li>
           <li>
-            <NavLink to='/signup' className='about-me__link-item'>
+            <a className='about-me__link-item' href='https://github.com/Ali-Gator'>
               Github
-            </NavLink>
+            </a>
           </li>
         </ul>
       </div>

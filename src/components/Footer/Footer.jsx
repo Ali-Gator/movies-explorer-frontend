@@ -1,6 +1,5 @@
 import React from 'react';
 import './footer.css';
-import { NavLink } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -10,19 +9,19 @@ function Footer() {
         <p className='footer__copyright'>&copy; 2022</p>
         <ul className='footer__links'>
           <li>
-            <NavLink to='/signup' className='footer__link'>
+            <a className='footer__link' href='https://practicum.yandex.ru/'>
               Яндекс.Практикум
-            </NavLink>
+            </a>
           </li>
           <li>
-            <NavLink to='/signup' className='footer__link'>
+            <a className='footer__link' href='https://github.com/Ali-Gator'>
               Github
-            </NavLink>
+            </a>
           </li>
           <li>
-            <NavLink to='/signup' className='footer__link'>
+            <a className='footer__link' href='https://www.facebook.com/oleg.gordienov'>
               Facebook
-            </NavLink>
+            </a>
           </li>
         </ul>
       </div>
