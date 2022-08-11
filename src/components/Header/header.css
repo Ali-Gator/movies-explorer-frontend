@@ -27,7 +27,7 @@
 .header__link_main {
   margin-left: 30px;
   padding: 8px 20px;
-  color: #000000;
+  color: inherit;
   border-radius: 3px;
   background-color: #2BE080;
 }
