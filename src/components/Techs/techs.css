@@ -28,6 +28,7 @@
 }
 
 .techs__skill-item {
+  line-height: 1.21;
   width: 90px;
   padding: 21px 0 22px;
   text-align: center;

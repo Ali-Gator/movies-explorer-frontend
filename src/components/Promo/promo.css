@@ -11,7 +11,7 @@
   width: 722px;
   height: 244px;
   content: '';
-  background-image: url(../../images/banner-beauty.svg);
+  background-image: url('../../images/banner-beauty.svg');
 }
 
 .promo__title {
