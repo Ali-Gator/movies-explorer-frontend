@@ -12,6 +12,7 @@
   height: 244px;
   content: '';
   background-image: url('../../images/banner-beauty.svg');
+  background-size: 722px 244px;
 }
 
 .promo__title {
@@ -22,4 +23,23 @@
   margin: 0;
   letter-spacing: -0.04em;
   color: #ffffff;
+}
+
+@media screen and (max-width: 1100px) {
+  .promo {
+    padding: 300px 44px 440px;
+  }
+
+  .promo__title {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .promo::after {
+    top: 64.5%;
+    right: calc(50% - 340px);
+    width: 680px;
+    height: 230px;
+    background-size: 680px 230px;
+  }
 }

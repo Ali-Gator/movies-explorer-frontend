@@ -54,6 +54,41 @@
   height: 327px;
   margin-top: 66px;
   border-radius: 10px;
-  /*object-fit: cover;*/
   justify-self: end;
+}
+
+@media screen and (max-width: 1100px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__title {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 16px 0 0;
+  }
+
+  .about-me__text {
+    line-height: 1.5;
+    margin: 20px 0 0;
+  }
+
+  .about-me__links {
+    margin: 87px 0 0;
+  }
+
+  .about-me__link-item {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .about-me__image {
+    width: 255px;
+    height: 307px;
+  }
 }

@@ -12,8 +12,11 @@
   height: 38px;
 }
 
-.header__auth {
-
+.header__nav-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .header__link {
@@ -30,4 +33,10 @@
   color: inherit;
   border-radius: 3px;
   background-color: #2BE080;
+}
+
+@media screen and (max-width: 1100px) {
+  .header {
+    padding: 0 30px;
+  }
 }
