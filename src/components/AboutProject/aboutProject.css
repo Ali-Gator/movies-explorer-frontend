@@ -85,3 +85,51 @@
     padding: 9px 10px;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .subheader {
+    font-size: 18px;
+    line-height: 1.22;
+    padding-bottom: 28px;
+  }
+
+  .about-project__list {
+    flex-direction: column;
+    margin-top: 60px;
+    row-gap: 56px;
+  }
+
+  .facts {
+    width: 100%;
+  }
+
+  .facts__term {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .facts__description {
+    margin: 16px 0 0;
+  }
+
+  .term-scale {
+    margin-top: 60px;
+    grid-template-columns: 100px auto;
+  }
+
+  .term-scale__title {
+    font-size: 11px;
+    line-height: 1.18;
+    padding: 11px 10px;
+  }
+
+  .term-scale__text {
+    font-weight: 400;
+    line-height: 1.21;
+    margin: 10px 0 0;
+  }
+}

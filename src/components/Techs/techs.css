@@ -61,3 +61,35 @@
     padding: 21px 0;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 60px auto 0;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 1.45;
+    margin: 24px auto 0;
+  }
+
+  .techs__skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    max-width: 178px;
+    margin: 50px auto 0;
+    row-gap: 10px;
+  }
+
+  .techs__skill-item {
+    font-size: 12px;
+    width: 84px;
+  }
+}

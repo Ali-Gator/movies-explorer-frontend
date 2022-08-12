@@ -23,3 +23,10 @@ body {
     line-height: 1.5;
   }
 }
+
+@media screen and (max-width: 550px) {
+  body {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
