@@ -30,3 +30,15 @@ body {
     line-height: 1.45;
   }
 }
+
+.link {
+  transition: color 0.2s ease-in;
+}
+
+.link:hover {
+  color: #e8902c;
+}
+
+.link:active {
+  font-weight: 700
+}

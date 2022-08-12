@@ -9,17 +9,17 @@ function Footer() {
         <p className='footer__copyright'>&copy; 2022</p>
         <ul className='footer__links'>
           <li>
-            <a className='footer__link' href='https://practicum.yandex.ru/'>
+            <a className='footer__link link' href='https://practicum.yandex.ru/'>
               Яндекс.Практикум
             </a>
           </li>
           <li>
-            <a className='footer__link' href='https://github.com/Ali-Gator'>
+            <a className='footer__link link' href='https://github.com/Ali-Gator'>
               Github
             </a>
           </li>
           <li>
-            <a className='footer__link' href='https://www.facebook.com/oleg.gordienov'>
+            <a className='footer__link link' href='https://www.facebook.com/oleg.gordienov'>
               Facebook
             </a>
           </li>

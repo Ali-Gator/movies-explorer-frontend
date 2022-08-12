@@ -17,12 +17,12 @@ function AboutMe() {
         </p>
         <ul className='about-me__links'>
           <li>
-            <a className='about-me__link-item' href='https://www.facebook.com/oleg.gordienov'>
+            <a className='about-me__link-item link' href='https://www.facebook.com/oleg.gordienov'>
               Facebook
             </a>
           </li>
           <li>
-            <a className='about-me__link-item' href='https://github.com/Ali-Gator'>
+            <a className='about-me__link-item link' href='https://github.com/Ali-Gator'>
               Github
             </a>
           </li>
