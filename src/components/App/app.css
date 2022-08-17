@@ -32,13 +32,27 @@ body {
 }
 
 .link {
-  transition: color 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
 }
 
 .link:hover {
-  color: #e8902c;
+  opacity: 0.7;
 }
 
 .link:active {
   font-weight: 700
+}
+
+.button {
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  border: none;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:active {
+  transform: scale(90%);
 }
