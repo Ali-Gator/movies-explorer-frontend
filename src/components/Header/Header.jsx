@@ -6,29 +6,45 @@ import logo from '../../images/logo.svg';
 function Header({ isAuth = false }) {
   return (
     <header className={`header ${isAuth && 'header_inner'}`}>
-      <img className='header__logo' alt='Логотип: зеленая снежинка' src={logo} />
+      <NavLink to='/'>
+        <img className='header__logo' alt='Логотип: зеленая снежинка' src={logo} />
+      </NavLink>
       <nav className='header__nav'>
         {isAuth ? (
-          <ul className='header__nav-list'>
-            <li className='header__nav-item header__nav-item_inner'>
-              <NavLink
-                to='/signup'
-                className='header__link header__link_inner header__link_inner-active link'
-              >
-                Фильмы
-              </NavLink>
-            </li>
-            <li className='header__nav-item header__nav-item_inner'>
-              <NavLink to='/signup' className='header__link header__link_inner link'>
-                Сохранённые фильмы
-              </NavLink>
-            </li>
-            <li className='header__nav-item header__nav-item_inner'>
-              <NavLink to='/signup' className='header__link header__link_inner link'>
-                Аккаунт
-              </NavLink>
-            </li>
-          </ul>
+          <>
+            <input id='header__menu-toggle' type='checkbox' className='header__menu-toggle' />
+            <label className='header__menu-btn' htmlFor='header__menu-toggle'>
+              <span className='header__menu-icon' />
+            </label>
+            <ul className='header__nav-list header__nav-list_inner'>
+              <li className='header__nav-item header__nav-item_inner header__nav-item_hidable'>
+                <NavLink to='/' className='header__link header__link_inner link'>
+                  Главная
+                </NavLink>
+              </li>
+              <li className='header__nav-item header__nav-item_inner'>
+                <NavLink
+                  to='/signup'
+                  className='header__link header__link_inner header__link_inner-active link'
+                >
+                  Фильмы
+                </NavLink>
+              </li>
+              <li className='header__nav-item header__nav-item_inner'>
+                <NavLink to='/signup' className='header__link header__link_inner link'>
+                  Сохранённые фильмы
+                </NavLink>
+              </li>
+              <li className='header__nav-item header__nav-item_inner'>
+                <NavLink
+                  to='/signup'
+                  className='header__link header__link_inner header__nav-item_last link'
+                >
+                  Аккаунт
+                </NavLink>
+              </li>
+            </ul>
+          </>
         ) : (
           <ul className='header__nav-list'>
             <li className='header__nav-item'>
