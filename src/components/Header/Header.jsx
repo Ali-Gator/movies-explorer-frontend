@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import './header.css';
 import logo from '../../images/logo.svg';
 
-function Header({ isAuth = false }) {
+function Header({ isInner = false }) {
   return (
-    <header className={`header ${isAuth && 'header_inner'}`}>
+    <header className={`header ${isInner && 'header_inner'}`}>
       <NavLink to='/'>
         <img className='header__logo' alt='Логотип: зеленая снежинка' src={logo} />
       </NavLink>
       <nav className='header__nav'>
-        {isAuth ? (
+        {isInner ? (
           <>
             <input id='header__menu-toggle' type='checkbox' className='header__menu-toggle' />
             <label className='header__menu-btn' htmlFor='header__menu-toggle'>

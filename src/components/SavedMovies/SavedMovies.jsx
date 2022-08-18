@@ -9,7 +9,7 @@ import Preloader from '../Preloader/Preloader';
 function SavedMovies() {
   return (
     <div className='saved-movies'>
-      <Header isAuth />
+      <Header isInner />
       <SearchForm />
       <MoviesCardList />
       <Footer />

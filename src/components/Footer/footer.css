@@ -33,7 +33,6 @@
 }
 
 .footer__link {
-  text-decoration: none;
   color: inherit;
 }
 
@@ -74,7 +73,6 @@
   }
 
   .footer__link {
-    text-decoration: none;
     color: inherit;
   }
 }

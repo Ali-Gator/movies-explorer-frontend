@@ -33,6 +33,8 @@ body {
 
 .link {
   transition: opacity 0.2s ease-in;
+  text-decoration: none;
+  color: inherit;
 }
 
 .link:hover {
