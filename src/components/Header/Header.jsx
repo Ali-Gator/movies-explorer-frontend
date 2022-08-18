@@ -24,20 +24,20 @@ function Header({ isAuth = false }) {
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
-                  to='/signup'
+                  to='/movies'
                   className='header__link header__link_inner header__link_inner-active link'
                 >
                   Фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
-                <NavLink to='/signup' className='header__link header__link_inner link'>
+                <NavLink to='/saved-movies' className='header__link header__link_inner link'>
                   Сохранённые фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
-                  to='/signup'
+                  to='/profile'
                   className='header__link header__link_inner header__nav-item_last link'
                 >
                   Аккаунт
