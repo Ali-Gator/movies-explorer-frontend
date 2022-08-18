@@ -22,12 +22,15 @@ function Profile() {
           <input type='email' className='profile-form__input' id='email' value='pochta@yandex.ru' />
         </div>
         <div className='profile-form__buttons-wrapper'>
-          <button
-            className='profile-form__button button profile-form__button_type_edit'
-            type='button'
-          >
-            Редактировать
-          </button>
+          {true && (
+            <button
+              className='profile-form__button button profile-form__button_type_edit'
+              type='button'
+            >
+              Редактировать
+            </button>
+          )}
+          {false && <p className='profile-form__error'>При обновлении профиля произошла ошибка.</p>}
           {false && (
             <button
               className='profile-form__button button profile-form__button_type_save'
@@ -36,10 +39,11 @@ function Profile() {
               Сохранить
             </button>
           )}
-          {false && <p className='profile-form__error'>При обновлении профиля произошла ошибка.</p>}
-          <NavLink to='/' className='profile-form__link link'>
-            Выйти из аккаунта
-          </NavLink>
+          {true && (
+            <NavLink to='/' className='profile-form__link link'>
+              Выйти из аккаунта
+            </NavLink>
+          )}
         </div>
       </form>
     </div>
