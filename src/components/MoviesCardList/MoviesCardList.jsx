@@ -9,7 +9,7 @@ function MoviesCardList() {
     (async () => {
       const res = await fetch('https://api.nomoreparties.co/beatfilm-movies');
       const movies = await res.json();
-      const samples = new Array(8).fill(movies[0], 0, 16);
+      const samples = new Array(5).fill(movies[0]);
       setMovieData(samples);
     })();
   }, []);

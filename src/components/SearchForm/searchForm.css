@@ -51,3 +51,19 @@
     padding: 80px 30px 60px;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .search-form {
+    padding: 84px 14px 50px;
+  }
+
+  .search-form__input {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .search-form__input-wrapper {
+    padding-bottom: 9px;
+  }
+
+}

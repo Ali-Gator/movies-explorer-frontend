@@ -31,3 +31,11 @@
     row-gap: 36px;
   }
 }
+
+@media screen and (max-width: 550px) {
+  .card-list__card-wrapper {
+    justify-content: center;
+    padding: 40px 0 30px;
+    row-gap: 20px;
+  }
+}
