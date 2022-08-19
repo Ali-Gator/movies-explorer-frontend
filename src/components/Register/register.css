@@ -1,0 +1,11 @@
+.register {
+  position: relative;
+  max-width: 396px;
+  margin: 0 auto;
+  padding: 70px 0;
+}
+
+.register__form {
+  margin: 40px 0 0;
+}
+
