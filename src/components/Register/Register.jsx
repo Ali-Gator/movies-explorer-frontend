@@ -35,7 +35,7 @@ function Register() {
 
   return (
     <div className='register'>
-      <NavLink to='/'>
+      <NavLink to='/' className='register__link'>
         <img src={logo} alt='Логотип: зеленый кружок' className='register__logo' />
       </NavLink>
       <Form formData={formData} className='register__form' />

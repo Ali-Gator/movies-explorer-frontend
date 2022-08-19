@@ -25,6 +25,7 @@
 }
 
 .form__button {
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.21;
   width: 100%;
@@ -35,6 +36,7 @@
 }
 
 .form__text {
+  font-size: 14px;
   line-height: 1.21;
   margin: 16px 0 0;
   text-align: center;
@@ -44,4 +46,36 @@
 .form__link {
   margin: 0 0 0 6px;
   color: #FF6838;
+}
+
+@media screen and (max-width: 550px) {
+  .form__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.21;
+    margin: 0;
+    text-align: center;
+  }
+
+  .form__inputs-wrapper {
+    margin: 80px 0 0;
+  }
+
+  .form__button__wrapper_type_far {
+    margin: 267px 0 0;
+  }
+
+  .form__button__wrapper_type_near {
+    margin: 157px 0 0;
+  }
+
+  .form__button {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .form__text {
+    font-size: 12px;
+    line-height: 1.25;
+  }
 }
