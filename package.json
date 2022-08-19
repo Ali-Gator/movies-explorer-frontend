@@ -11,7 +11,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint:fix": "eslint --ext .jsx --fix src/"
+    "lint:fix": "eslint --ext .jsx --fix src/",
+    "deploy": "npm run build && scp -r ./build/* oleg@51.250.98.22:/home/oleg/movies-explorer-frontend"
   },
   "eslintConfig": {
     "extends": [
