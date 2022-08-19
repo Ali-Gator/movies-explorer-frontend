@@ -6,7 +6,7 @@ function Footer() {
     <footer className='footer'>
       <p className='footer__text'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className='footer__wrapper'>
-        <p className='footer__copyright'>&copy; 2022</p>
+        <p className='footer__copyright'>&copy; {`${new Date().getFullYear()}`}</p>
         <ul className='footer__links'>
           <li>
             <a className='footer__link link' href='https://practicum.yandex.ru/'>
