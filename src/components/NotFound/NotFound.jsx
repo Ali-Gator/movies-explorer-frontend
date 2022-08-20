@@ -6,7 +6,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className='not-found'>
+    <main className='not-found'>
       <p className='not-found__title'>404</p>
       <p className='not-found__caption'>Страница не найдена</p>
       <button
@@ -18,7 +18,7 @@ function NotFound() {
       >
         Назад
       </button>
-    </div>
+    </main>
   );
 }
 

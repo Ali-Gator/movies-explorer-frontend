@@ -10,8 +10,10 @@ function Movies() {
   return (
     <div className='movies'>
       <Header isInner />
-      <SearchForm />
-      <MoviesCardList />
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
       {false && <Preloader />}
     </div>

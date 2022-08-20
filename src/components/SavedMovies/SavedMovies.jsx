@@ -10,8 +10,10 @@ function SavedMovies() {
   return (
     <div className='saved-movies'>
       <Header isInner />
-      <SearchForm />
-      <MoviesCardList />
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
       {false && <Preloader />}
     </div>

@@ -28,12 +28,12 @@ function Login() {
   };
 
   return (
-    <div className='login'>
+    <main className='login'>
       <NavLink to='/' className='login__link'>
         <img src={logo} alt='Логотип: зеленый кружок' className='login__logo' />
       </NavLink>
       <Form formData={formData} className='login__form' />
-    </div>
+    </main>
   );
 }
 

@@ -34,12 +34,12 @@ function Register() {
   };
 
   return (
-    <div className='register'>
+    <main className='register'>
       <NavLink to='/' className='register__link'>
         <img src={logo} alt='Логотип: зеленый кружок' className='register__logo' />
       </NavLink>
       <Form formData={formData} className='register__form' />
-    </div>
+    </main>
   );
 }
 
