@@ -21,11 +21,13 @@
 
 .techs__skills {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 100px 225px 0;
   padding: 0;
   list-style: none;
   column-gap: 10px;
+  row-gap: 10px;
 }
 
 .techs__skill-item {

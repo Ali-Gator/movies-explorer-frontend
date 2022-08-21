@@ -8,7 +8,12 @@ function Input({ data }) {
       <label htmlFor={id} className='input__label'>
         {label}
       </label>
-      <input className='input__field' type={type} id={id} value='Виталий' />
+      <input
+        className='input__field'
+        type={type}
+        id={id}
+        placeholder={`Введите ${label.toLowerCase()}`}
+      />
       {error && <p className='input__error'>{error}</p>}
     </div>
   );
