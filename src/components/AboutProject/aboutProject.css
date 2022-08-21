@@ -1,0 +1,135 @@
+.about-project {
+  padding: 110px 70px;
+}
+
+.subheader {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.23;
+  margin: 0;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #000000;
+}
+
+.about-project__list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+
+.facts {
+  width: calc((100% - 40px) / 2);
+}
+
+.facts__term {
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.facts__description {
+  margin: 26px 0 0;
+}
+
+.term-scale {
+  display: grid;
+  align-items: center;
+  margin-top: 110px;
+  grid-template-columns: 228px auto;
+}
+
+.term-scale__title {
+  line-height: 1.21;
+  margin: 0;
+  padding: 9px 14px;
+  text-align: center;
+}
+
+.term-scale__title_type_primary {
+  background-color: #2BE080;
+}
+
+.term-scale__title_type_secondary {
+  background-color: #F2F2F2;
+}
+
+.term-scale__text {
+  font-weight: 500;
+  line-height: 1.21;
+  margin: 14px 0 0;
+  text-align: center;
+  color: #A0A0A0;
+}
+
+@media screen and (max-width: 1100px) {
+  .about-project {
+    padding: 90px 50px 93px;
+  }
+
+  .facts {
+    width: calc((100% - 30px) / 2);
+  }
+
+  .facts__description {
+    margin: 22px 0 0;
+  }
+
+  .term-scale {
+    margin-top: 93px;
+    grid-template-columns: 140px auto;
+  }
+
+  .term-scale__title {
+    font-size: 14px;
+    padding: 9px 10px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .subheader {
+    font-size: 18px;
+    line-height: 1.22;
+    padding-bottom: 28px;
+  }
+
+  .about-project__list {
+    flex-direction: column;
+    margin-top: 60px;
+    row-gap: 56px;
+  }
+
+  .facts {
+    width: 100%;
+  }
+
+  .facts__term {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .facts__description {
+    margin: 16px 0 0;
+  }
+
+  .term-scale {
+    margin-top: 60px;
+    grid-template-columns: 100px auto;
+  }
+
+  .term-scale__title {
+    font-size: 11px;
+    line-height: 1.18;
+    padding: 11px 10px;
+  }
+
+  .term-scale__text {
+    font-weight: 400;
+    line-height: 1.21;
+    margin: 10px 0 0;
+  }
+}
