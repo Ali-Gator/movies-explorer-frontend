@@ -18,27 +18,49 @@ function Header({ isInner = false }) {
             </label>
             <ul className='header__nav-list header__nav-list_inner'>
               <li className='header__nav-item header__nav-item_inner header__nav-item_hidable'>
-                <NavLink to='/' className='header__link header__link_inner link'>
+                <NavLink
+                  to='/'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
+                >
                   Главная
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
                   to='/movies'
-                  className='header__link header__link_inner header__link_inner-active link'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
                 >
                   Фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
-                <NavLink to='/saved-movies' className='header__link header__link_inner link'>
+                <NavLink
+                  to='/saved-movies'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
+                >
                   Сохранённые фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
                   to='/profile'
-                  className='header__link header__link_inner header__nav-item_last link'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner header__nav-item_last link`
+                  }
                 >
                   Аккаунт
                 </NavLink>

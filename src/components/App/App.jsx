@@ -20,11 +20,11 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Main />} />
           <Route path='/signup' element={<Register />} />
-          <Route path='signin' element={<Login />} />
+          <Route path='/signin' element={<Login />} />
           <Route element={<ProtectedRoute />}>
-            <Route path='movies' element={<Movies />} />
-            <Route path='saved-movies' element={<SavedMovies />} />
-            <Route path='profile' element={<Profile />} />
+            <Route path='/movies' element={<Movies />} />
+            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route path='/profile' element={<Profile />} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
