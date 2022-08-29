@@ -1,8 +1,9 @@
 import React from 'react';
 import './input.css';
 
-function Input({ inputData, onChange }) {
-  const { id, label, type, error } = inputData;
+function Input({ inputData, onChange, errors }) {
+  const { id, label, type } = inputData;
+
   return (
     <div className='input'>
       <label htmlFor={id} className='input__label'>
@@ -17,7 +18,7 @@ function Input({ inputData, onChange }) {
         placeholder={`Введите ${label.toLowerCase()}`}
         onChange={onChange}
       />
-      {error && <p className='input__error'>{error}</p>}
+      {errors[id] && <p className='input__error'>{errors[id]}</p>}
     </div>
   );
 }

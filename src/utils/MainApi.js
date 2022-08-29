@@ -19,25 +19,26 @@ class MainApi {
     throw new Error(res.status.toString());
   }
 
-  async signIn() {
+  async signIn({ email, password }) {
     const res = await fetch(`${this.url}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({ email, password })
     });
     if (res.ok) {
       return res.json();
     }
-    throw new Error();
+    throw new Error(res.status.toString());
   }
 
-  async getUserInfo() {
+  async getUserInfo(jwt) {
     const res = await fetch(`${this.url}/users/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.jwt}`
+        Authorization: `Bearer ${jwt}`
       }
     });
     if (res.ok) {

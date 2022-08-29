@@ -10,7 +10,7 @@ class MoviesApi {
     if (res.ok) {
       return res.json();
     }
-    throw new Error(constants.SERVER_ERR_MSG);
+    throw new Error(constants.MESSAGE.BEATFILM_ERR);
   }
 }
 

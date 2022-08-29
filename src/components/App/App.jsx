@@ -9,21 +9,28 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import InfoTooltipProvider from '../../contexts/InfoTooltipContext';
+import CurrentUserProvider from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-      <InfoTooltip isOk={false} isOpen />
-    </>
+    <InfoTooltipProvider>
+      <CurrentUserProvider>
+        <Routes>
+          <Route exact path='/' element={<Main />} />
+          <Route path='/signup' element={<Register />} />
+          <Route path='signin' element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='movies' element={<Movies />} />
+            <Route path='saved-movies' element={<SavedMovies />} />
+            <Route path='profile' element={<Profile />} />
+          </Route>
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </CurrentUserProvider>
+      <InfoTooltip />
+    </InfoTooltipProvider>
   );
 }
 

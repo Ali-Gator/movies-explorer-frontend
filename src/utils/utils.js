@@ -1,16 +1,25 @@
 import { useCallback, useState } from 'react';
+import constants from './constants';
 
 export function useFormWithValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const nameRegExp = /[^a-z\- а-яё]/gi;
 
   const handleChange = (event) => {
     const { target } = event;
     const { name, value, validationMessage } = target;
+
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: validationMessage });
     setIsValid(target.closest('form').checkValidity());
+    setErrors({ ...errors, [name]: validationMessage });
+    if (name === 'name' && nameRegExp.test(value) && !validationMessage) {
+      setErrors({
+        ...errors,
+        [name]: constants.MESSAGE.NAME_ERR
+      });
+    }
   };
 
   const resetForm = useCallback(
@@ -25,4 +34,4 @@ export function useFormWithValidation() {
   return { values, handleChange, errors, isValid, resetForm };
 }
 
-export const asd = 0;
+export const asdd = 0;
