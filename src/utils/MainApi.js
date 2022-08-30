@@ -46,6 +46,21 @@ class MainApi {
     }
     throw new Error();
   }
+
+  async patchCurrentUser(jwt, { email, name }) {
+    const res = await fetch(`${this.url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`
+      },
+      body: JSON.stringify({ email, name })
+    });
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error();
+  }
 }
 
 export default new MainApi(constants.API_URL);

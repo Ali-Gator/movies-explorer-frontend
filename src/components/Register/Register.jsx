@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './register.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Form from '../Form/Form';
 import logo from '../../images/logo.svg';
 import constants from '../../utils/constants';
 import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Register() {
   const [errorMessage, setErrorMessage] = useState('');
+  const { setUser } = useContext(CurrentUserContext);
   const navigate = useNavigate();
   const registerData = constants.REGISTER_FORM;
 
   const onSubmit = async (values) => {
     try {
-      const data = await mainApi.signUp(values);
-      console.log(data);
+      const userData = await mainApi.signUp(values);
+      setUser(userData);
       navigate('/movies', { replace: true });
     } catch (e) {
       switch (e.message) {
@@ -32,8 +34,6 @@ function Register() {
       }
     }
   };
-
-  // const renderInputs
 
   return (
     <main className='register'>
