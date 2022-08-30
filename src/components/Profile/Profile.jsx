@@ -22,6 +22,7 @@ function Profile() {
 
   const handleExit = () => {
     localStorage.removeItem('jwt');
+    setUser(null);
     navigate('/', { replace: true });
   };
 
@@ -65,7 +66,7 @@ function Profile() {
 
   return (
     <div className='profile'>
-      <Header isInner />
+      <Header />
       <main>
         <form className='profile-form' onSubmit={handleSubmit}>
           <h2 className='profile-form__title'>{`Привет, ${user.name}!`}</h2>

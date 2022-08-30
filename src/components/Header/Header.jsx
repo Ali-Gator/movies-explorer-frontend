@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './header.css';
 import logo from '../../images/logo.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Header({ isInner = false }) {
+function Header() {
+  const { user } = useContext(CurrentUserContext);
+  const isAuth = Boolean(user?.email);
+
   return (
-    <header className={`header ${isInner && 'header_inner'}`}>
+    <header className={`header ${isAuth && 'header_inner'}`}>
       <NavLink to='/'>
         <img className='header__logo' alt='Логотип: зеленая снежинка' src={logo} />
       </NavLink>
       <nav className='header__nav'>
-        {isInner ? (
+        {isAuth ? (
           <>
             <input id='header__menu-toggle' type='checkbox' className='header__menu-toggle' />
             <label className='header__menu-btn' htmlFor='header__menu-toggle'>
