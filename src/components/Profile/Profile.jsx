@@ -21,7 +21,7 @@ function Profile() {
   };
 
   const handleExit = () => {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem(constants.STORAGE.JWT);
     setUser(null);
     navigate('/', { replace: true });
   };
@@ -34,7 +34,7 @@ function Profile() {
   const handleSubmit = async (evt) => {
     try {
       evt.preventDefault();
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem(constants.STORAGE.JWT);
       const newUser = {
         name: values.name || user.name,
         email: values.email || user.email
@@ -119,7 +119,7 @@ function Profile() {
               <button
                 className='profile-form__button button profile-form__button_type_save'
                 type='submit'
-                disabled={isValuesSame() && !isValid}
+                disabled={isValuesSame() || !isValid}
               >
                 Сохранить
               </button>

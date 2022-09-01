@@ -16,7 +16,7 @@ function Login() {
   const onSubmit = async (values) => {
     try {
       const { token } = await mainApi.signIn(values);
-      localStorage.setItem('jwt', token);
+      localStorage.setItem(constants.STORAGE.JWT, token);
       const user = await mainApi.getUserInfo(token);
       setUser(user);
       navigate('/movies', { replace: true });

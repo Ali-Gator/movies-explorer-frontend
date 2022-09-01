@@ -13,11 +13,17 @@ const constants = {
     SERVER_ERR: 'На сервере произошла ошибка',
     NOT_FOUND_ERR: 'Страница по указанному маршруту не найдена',
     NAME_ERR: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
-    EDIT_PROFILE: 'Ваши данные успешно обновлены'
+    EDIT_PROFILE: 'Ваши данные успешно обновлены',
+    SEARCH_QUERY_ERR: 'Введите ключевое слово'
   },
   MESSAGE_TYPE: {
     ERROR: 'error',
     OK: 'ok'
+  },
+  INPUT_SHORT: 'short',
+  STORAGE: {
+    JWT: 'jwt',
+    MOVIES_DATA: 'movies'
   },
   REGISTER_FORM: {
     title: 'Добро пожаловать!',

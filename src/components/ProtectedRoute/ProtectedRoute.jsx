@@ -3,6 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
+import constants from '../../utils/constants';
 
 function ProtectedRoute({ redirectPath = '/signin' }) {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -11,7 +12,7 @@ function ProtectedRoute({ redirectPath = '/signin' }) {
   useEffect(() => {
     (async () => {
       if (!user.email) {
-        const token = localStorage.getItem('jwt');
+        const token = localStorage.getItem(constants.STORAGE.JWT);
         if (token) {
           const userInfo = await mainApi.getUserInfo(token);
           setUser(userInfo);
