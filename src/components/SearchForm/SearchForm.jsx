@@ -5,8 +5,10 @@ import Preloader from '../Preloader/Preloader';
 import constants from '../../utils/constants';
 import { InfoTooltipContext } from '../../contexts/InfoTooltipContext';
 import moviesApi from '../../utils/MoviesApi';
+import { filterMovies } from '../../utils/utils';
 
-function SearchForm({ setInitMovies }) {
+function SearchForm({ setMoviesToShow }) {
+  const [initMovies, setInitMovies] = useState([]);
   const [querySearch, setQuerySearch] = useState('');
   const [isShorts, setIsShorts] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +30,9 @@ function SearchForm({ setInitMovies }) {
         return;
       }
       const movies = await moviesApi.getMovies();
-      setInitMovies(movies);
+      setInitMovies([...movies]);
+      setQuerySearch(searchQuery);
+      setIsShorts(isShortChecked);
       localStorage.setItem(
         constants.STORAGE.MOVIES_DATA,
         JSON.stringify({
@@ -53,6 +57,17 @@ function SearchForm({ setInitMovies }) {
       setIsShorts(isShortChecked);
     }
   }, []);
+
+  useEffect(() => {
+    const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
+    setMoviesToShow(filteredMovies);
+  }, [initMovies]);
+
+  useEffect(() => {
+    console.log('asd');
+    const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
+    setMoviesToShow(filteredMovies);
+  }, [isShorts]);
 
   return (
     <>

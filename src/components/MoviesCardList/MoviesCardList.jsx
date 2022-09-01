@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './moviesCardList.css';
 import moviesApi from '../../utils/MoviesApi';
 
-function MoviesCardList() {
+function MoviesCardList({ moviesToShow }) {
   // const [movieData, setMovieData] = useState(null);
   const [error, setError] = useState(null);
-
+  console.log('movies: ', moviesToShow);
   // console.log(moviesApi.getMovies());
 
   useEffect(() => {

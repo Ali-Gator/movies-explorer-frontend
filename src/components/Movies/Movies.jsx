@@ -6,14 +6,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function Movies() {
-  const [initMovies, setInitMovies] = useState([]);
+  const [moviesToShow, setMoviesToShow] = useState([]);
 
   return (
     <div className='movies'>
       <Header />
       <main>
-        <SearchForm setInitMovies={setInitMovies} />
-        <MoviesCardList initMovies={initMovies} />
+        <SearchForm setMoviesToShow={setMoviesToShow} />
+        <MoviesCardList moviesToShow={moviesToShow} />
       </main>
       <Footer />
     </div>

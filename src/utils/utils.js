@@ -34,4 +34,13 @@ export function useFormWithValidation() {
   return { values, handleChange, errors, isValid, resetForm };
 }
 
-export const asdd = 0;
+export const filterMovies = (moviesArr, searchString, isShorts) => {
+  return moviesArr.filter((movie) => {
+    const isInRussian = movie.nameRU?.toLowerCase().includes(searchString);
+    const isInEnglish = movie.nameEN?.toLowerCase().includes(searchString);
+    if (isShorts) {
+      return movie.duration <= 40 && (isInRussian || isInEnglish);
+    }
+    return isInRussian || isInEnglish;
+  });
+};
