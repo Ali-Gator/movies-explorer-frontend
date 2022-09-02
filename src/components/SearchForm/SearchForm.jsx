@@ -64,7 +64,6 @@ function SearchForm({ setMoviesToShow }) {
   }, [initMovies]);
 
   useEffect(() => {
-    console.log('asd');
     const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
     setMoviesToShow(filteredMovies);
   }, [isShorts]);

@@ -1,7 +1,18 @@
 import React from 'react';
 import './filterCheckbox.css';
+import constants from '../../utils/constants';
 
 function FilterCheckbox({ isShorts, setIsShorts }) {
+  const handleChange = () => {
+    const savedValues = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+    console.log({ ...savedValues, isShortChecked: !isShorts });
+    localStorage.setItem(
+      constants.STORAGE.MOVIES_DATA,
+      JSON.stringify({ ...savedValues, isShortChecked: !isShorts })
+    );
+    setIsShorts(!isShorts);
+  };
+
   return (
     <div className='tumbler'>
       <label className='tumbler__label' htmlFor='short-tumbler'>
@@ -11,7 +22,7 @@ function FilterCheckbox({ isShorts, setIsShorts }) {
           name='shorts'
           type='checkbox'
           checked={isShorts}
-          onChange={() => setIsShorts(!isShorts)}
+          onChange={handleChange}
         />
         <span className='tumbler__graphic' />
       </label>
