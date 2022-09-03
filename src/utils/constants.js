@@ -1,6 +1,7 @@
 const constants = {
   BEATFILM_URL: 'https://api.nomoreparties.co/beatfilm-movies',
   API_URL: 'https://api.me.nomoredomains.sbs',
+  IMG_URL: 'https://api.nomoreparties.co',
   MESSAGE: {
     BEATFILM_ERR:
       'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
@@ -14,7 +15,9 @@ const constants = {
     NOT_FOUND_ERR: 'Страница по указанному маршруту не найдена',
     NAME_ERR: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
     EDIT_PROFILE: 'Ваши данные успешно обновлены',
-    SEARCH_QUERY_ERR: 'Введите ключевое слово'
+    SEARCH_QUERY_ERR: 'Введите ключевое слово',
+    NO_MOVIE_FOUND: 'Ничего не найдено',
+    START_SEARCH: 'Введите название фильма в поисковой строке'
   },
   MESSAGE_TYPE: {
     ERROR: 'error',

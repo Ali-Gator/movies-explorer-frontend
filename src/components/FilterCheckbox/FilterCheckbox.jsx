@@ -5,7 +5,6 @@ import constants from '../../utils/constants';
 function FilterCheckbox({ isShorts, setIsShorts }) {
   const handleChange = () => {
     const savedValues = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
-    console.log({ ...savedValues, isShortChecked: !isShorts });
     localStorage.setItem(
       constants.STORAGE.MOVIES_DATA,
       JSON.stringify({ ...savedValues, isShortChecked: !isShorts })

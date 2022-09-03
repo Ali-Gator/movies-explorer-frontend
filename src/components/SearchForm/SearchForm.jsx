@@ -5,10 +5,11 @@ import Preloader from '../Preloader/Preloader';
 import constants from '../../utils/constants';
 import { InfoTooltipContext } from '../../contexts/InfoTooltipContext';
 import moviesApi from '../../utils/MoviesApi';
-import { filterMovies } from '../../utils/utils';
+import { checkIsSavedMovies, filterMovies } from '../../utils/utils';
+import mainApi from '../../utils/MainApi';
 
 function SearchForm({ setMoviesToShow }) {
-  const [initMovies, setInitMovies] = useState([]);
+  const [initMovies, setInitMovies] = useState(null);
   const [querySearch, setQuerySearch] = useState('');
   const [isShorts, setIsShorts] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,7 @@ function SearchForm({ setMoviesToShow }) {
     try {
       e.preventDefault();
       setIsLoading(true);
+      setMessage('');
       const formValues = new FormData(e.target);
       const searchQuery = formValues.get('movie');
       const isShortChecked = formValues.get('shorts') === 'on';
@@ -29,15 +31,17 @@ function SearchForm({ setMoviesToShow }) {
         });
         return;
       }
-      const movies = await moviesApi.getMovies();
-      setInitMovies([...movies]);
+      const apiMovies = await moviesApi.getMovies();
+      const savedMovies = await mainApi.getSavedMovies(localStorage.getItem(constants.STORAGE.JWT));
+      const checkedMovies = checkIsSavedMovies(apiMovies, savedMovies);
+      setInitMovies([...checkedMovies]);
       setQuerySearch(searchQuery);
       setIsShorts(isShortChecked);
       localStorage.setItem(
         constants.STORAGE.MOVIES_DATA,
         JSON.stringify({
           searchQuery,
-          initialMovies: movies,
+          initialMovies: checkedMovies,
           isShortChecked
         })
       );
@@ -49,23 +53,32 @@ function SearchForm({ setMoviesToShow }) {
   };
 
   useEffect(() => {
-    const moviesData = localStorage.getItem(constants.STORAGE.MOVIES_DATA);
-    if (moviesData) {
-      const { searchQuery, initialMovies, isShortChecked } = JSON.parse(moviesData);
+    const moviesData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+    if (moviesData?.initialMovies) {
+      const { searchQuery, initialMovies, isShortChecked } = moviesData;
       setQuerySearch(searchQuery);
       setInitMovies(initialMovies);
       setIsShorts(isShortChecked);
+    } else {
+      setMessage(constants.MESSAGE.START_SEARCH);
     }
   }, []);
 
   useEffect(() => {
-    const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
-    setMoviesToShow(filteredMovies);
+    if (initMovies !== null) {
+      const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
+      setMoviesToShow(filteredMovies);
+    }
   }, [initMovies]);
 
   useEffect(() => {
-    const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
-    setMoviesToShow(filteredMovies);
+    if (initMovies !== null) {
+      const movieData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+      if (movieData?.initialMovies.length > 0) {
+        const filteredMovies = filterMovies(movieData.initialMovies, querySearch, isShorts);
+        setMoviesToShow(filteredMovies);
+      }
+    }
   }, [isShorts]);
 
   return (

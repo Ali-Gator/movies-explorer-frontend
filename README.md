@@ -5,3 +5,7 @@ https://www.figma.com/file/mOqbAi0TKa6pU2Ur6fvkwc/Diploma-Oleg?node-id=932%3A390
 ## Deploy
 
 https://movie.nomoredomains.sbs
+
+## Todo
+
++ add react context to film data

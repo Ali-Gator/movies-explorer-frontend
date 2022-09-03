@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import './moviesCardList.css';
-import moviesApi from '../../utils/MoviesApi';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import constants from '../../utils/constants';
+import { calculateAddMovies, calculateMoviesToRender, useEvent } from '../../utils/utils';
 
 function MoviesCardList({ moviesToShow }) {
-  const [error, setError] = useState(null);
-  console.log('movies: ', moviesToShow);
+  const [moviesToRender, setMoviesToRender] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleShowMore = () => {
+    setMoviesToRender((prevState) => [
+      ...prevState,
+      ...calculateAddMovies(moviesToShow, moviesToRender, screenWidth)
+    ]);
+  };
+
+  useEvent('resize', (e) => setScreenWidth(e.target.innerWidth));
 
   useEffect(() => {
-    (async () => {
-      try {
-        const initialMovies = await moviesApi.getMovies();
-        return initialMovies;
-      } catch (e) {
-        console.log(e);
-        setError(e.message);
-        return 0;
-      }
-    })();
-  }, []);
-
+    if (moviesToShow !== null) {
+      setMoviesToRender(calculateMoviesToRender(moviesToShow, screenWidth));
+    }
+  }, [screenWidth, moviesToShow]);
   return (
     <div className='card-list'>
       <div className='card-list__card-wrapper'>
-        {moviesToShow &&
-          moviesToShow.map((movie) => (
-            <MoviesCard
-              imageUrl={`https://api.nomoreparties.co/${movie.image.url}`}
-              title={movie.nameRU}
-              duration={movie.duration}
-              key={movie.id}
-            />
-          ))}
-        {error && <p className='card-list__message'>{error}</p>}
+        {moviesToRender &&
+          moviesToRender.map((movie) => <MoviesCard movie={movie} key={movie.id} />)}
+        {moviesToShow?.length === 0 && moviesToShow !== null && (
+          <p className='card-list__message'>{constants.MESSAGE.NO_MOVIE_FOUND}</p>
+        )}
       </div>
-      <button className='card-list__button button' type='button'>
-        Ещё
-      </button>
+      {moviesToRender.length < moviesToShow?.length && (
+        <button className='card-list__button button' type='button' onClick={handleShowMore}>
+          Ещё
+        </button>
+      )}
     </div>
   );
 }

@@ -32,9 +32,20 @@
   position: relative;
   width: 16px;
   height: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  border: none;
   border-radius: 50px;
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.card__like:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.card__like:active {
+  transform: scale(0.9);
 }
 
 .card__like::before {
