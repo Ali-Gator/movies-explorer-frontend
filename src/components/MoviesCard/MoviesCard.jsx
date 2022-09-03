@@ -41,14 +41,14 @@ function MoviesCard({ movie }) {
         savedMovies.initialMovies.forEach((film) => {
           if (film.id === id) {
             // eslint-disable-next-line no-param-reassign
-            film.status = 'liked';
+            film.status = constants.STATUS_LIKED;
             // eslint-disable-next-line no-param-reassign
             film.mongoId = _id;
             setNewMongoId(_id);
           }
         });
         localStorage.setItem(constants.STORAGE.MOVIES_DATA, JSON.stringify(savedMovies));
-        setCardStatus('liked');
+        setCardStatus(constants.STATUS_LIKED);
       }
     } catch (e) {
       setTooltip({
@@ -60,10 +60,10 @@ function MoviesCard({ movie }) {
 
   useEffect(() => {
     if (isSavedMovieLocation) {
-      setCardStatus('delete');
+      setCardStatus(constants.STATUS_DELETE);
     }
   }, []);
-  console.log(movie, movie.trailerLink);
+
   return isMovieDeleted ? null : (
     <div className='card'>
       <a href={movie.trailerLink} target='_blank' rel='noreferrer'>

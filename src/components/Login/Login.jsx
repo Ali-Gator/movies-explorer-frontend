@@ -16,6 +16,7 @@ function Login() {
   const onSubmit = async (values) => {
     try {
       const { token } = await mainApi.signIn(values);
+      localStorage.clear();
       localStorage.setItem(constants.STORAGE.JWT, token);
       const user = await mainApi.getUserInfo(token);
       setUser(user);

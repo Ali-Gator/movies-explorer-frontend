@@ -21,7 +21,7 @@ function Profile() {
   };
 
   const handleExit = () => {
-    localStorage.removeItem(constants.STORAGE.JWT);
+    localStorage.clear();
     setUser(null);
     navigate('/', { replace: true });
   };

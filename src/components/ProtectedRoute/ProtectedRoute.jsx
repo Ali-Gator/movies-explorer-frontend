@@ -1,23 +1,48 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
 import mainApi from '../../utils/MainApi';
 import constants from '../../utils/constants';
+import { InfoTooltipContext } from '../../contexts/InfoTooltipContext';
 
-function ProtectedRoute({ redirectPath = '/signin' }) {
+function ProtectedRoute({ redirectPath = '/' }) {
   const [showPreloader, setShowPreloader] = useState(true);
   const { user, setUser } = useContext(CurrentUserContext);
+  const { setTooltip } = useContext(InfoTooltipContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      if (!user.email) {
-        const token = localStorage.getItem(constants.STORAGE.JWT);
-        if (token) {
-          const userInfo = await mainApi.getUserInfo(token);
-          setUser(userInfo);
+      try {
+        if (!user.email) {
+          const token = localStorage.getItem(constants.STORAGE.JWT);
+          if (token) {
+            const userInfo = await mainApi.getUserInfo(token);
+            setUser(userInfo);
+          }
+          setShowPreloader(false);
         }
-        setShowPreloader(false);
+      } catch (e) {
+        switch (e.message) {
+          case '401': {
+            setTooltip({
+              message: constants.MESSAGE.NO_TOKEN,
+              type: constants.MESSAGE_TYPE.ERROR
+            });
+            break;
+          }
+          default: {
+            setTooltip({
+              message: constants.MESSAGE.SERVER_ERR,
+              type: constants.MESSAGE_TYPE.ERROR
+            });
+          }
+        }
+        setTimeout(() => {
+          localStorage.clear();
+          navigate('/', { replace: true });
+        }, 3000);
       }
     })();
   }, []);

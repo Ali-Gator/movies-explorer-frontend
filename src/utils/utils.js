@@ -6,6 +6,9 @@ export function useFormWithValidation() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const nameRegExp = /[^a-z\- а-яё]/gi;
+  const emailRegExp =
+    // eslint-disable-next-line no-useless-escape
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleChange = (event) => {
     const { target } = event;
@@ -18,6 +21,12 @@ export function useFormWithValidation() {
       setErrors({
         ...errors,
         [name]: constants.MESSAGE.NAME_ERR
+      });
+    }
+    if (name === 'email' && !emailRegExp.test(value) && !validationMessage) {
+      setErrors({
+        ...errors,
+        [name]: constants.MESSAGE.EMAIL_ERR
       });
     }
   };
@@ -68,20 +77,20 @@ export const useEvent = (event, handler, passive = false) => {
 
 export const calculateMoviesToRender = (initMovies, width) => {
   if (width > 1100) {
-    return initMovies.slice(0, 16);
+    return initMovies.slice(0, constants.INIT_MOVIES_DESKTOP);
   }
   if (width < 1100 && width > 550) {
-    return initMovies.slice(0, 8);
+    return initMovies.slice(0, constants.INIT_MOVIES_TABLET);
   }
-  return initMovies.slice(0, 5);
+  return initMovies.slice(0, constants.INIT_MOVIES_PHONE);
 };
 
 export const calculateAddMovies = (initMovies, renderedMovies, width) => {
   const beginIndex = renderedMovies.length;
   if (width > 1100) {
-    return initMovies.slice(beginIndex, beginIndex + 4);
+    return initMovies.slice(beginIndex, beginIndex + constants.ADD_MOVIES_DESKTOP);
   }
-  return initMovies.slice(beginIndex, beginIndex + 2);
+  return initMovies.slice(beginIndex, beginIndex + constants.ADD_MOVIES_TABLET);
 };
 
 export const checkIsSavedMovies = (initMovies, savedMovies) => {
@@ -91,7 +100,7 @@ export const checkIsSavedMovies = (initMovies, savedMovies) => {
     if (savedMovie) {
       checkedMovies.push({
         ...initMovie,
-        status: 'liked',
+        status: constants.STATUS_LIKED,
         mongoId: savedMovie._id
       });
     } else {
@@ -102,8 +111,10 @@ export const checkIsSavedMovies = (initMovies, savedMovies) => {
 };
 
 export const formattedDuration = (time) => {
-  if (time >= 60) {
-    return `${(time / 60).toFixed()}ч ${time % 60}м`;
+  if (time >= constants.MINUTES_PER_HOUR) {
+    return `${(time / constants.MINUTES_PER_HOUR).toFixed()}ч ${
+      time % constants.MINUTES_PER_HOUR
+    }м`;
   }
   return `${time}м`;
 };

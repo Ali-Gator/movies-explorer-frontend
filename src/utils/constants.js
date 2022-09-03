@@ -14,6 +14,7 @@ const constants = {
     SERVER_ERR: 'На сервере произошла ошибка',
     NOT_FOUND_ERR: 'Страница по указанному маршруту не найдена',
     NAME_ERR: 'Имя может содержать только латиницу, кириллицу, пробел или дефис',
+    EMAIL_ERR: 'Неверный формат email',
     EDIT_PROFILE: 'Ваши данные успешно обновлены',
     SEARCH_QUERY_ERR: 'Введите ключевое слово',
     NO_MOVIE_FOUND: 'Ничего не найдено',
@@ -28,6 +29,14 @@ const constants = {
     JWT: 'jwt',
     MOVIES_DATA: 'movies'
   },
+  STATUS_LIKED: 'liked',
+  STATUS_DELETE: 'delete',
+  INIT_MOVIES_DESKTOP: 16,
+  INIT_MOVIES_TABLET: 8,
+  INIT_MOVIES_PHONE: 5,
+  ADD_MOVIES_DESKTOP: 4,
+  ADD_MOVIES_TABLET: 2,
+  MINUTES_PER_HOUR: 60,
   REGISTER_FORM: {
     title: 'Добро пожаловать!',
     buttonText: 'Зарегистрироваться',

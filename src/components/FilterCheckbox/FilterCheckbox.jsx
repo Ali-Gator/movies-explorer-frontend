@@ -1,14 +1,19 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './filterCheckbox.css';
 import constants from '../../utils/constants';
 
 function FilterCheckbox({ isShorts, setIsShorts }) {
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
+
   const handleChange = () => {
-    const savedValues = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
-    localStorage.setItem(
-      constants.STORAGE.MOVIES_DATA,
-      JSON.stringify({ ...savedValues, isShortChecked: !isShorts })
-    );
+    if (!isSavedMovieLocation) {
+      const savedValues = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+      localStorage.setItem(
+        constants.STORAGE.MOVIES_DATA,
+        JSON.stringify({ ...savedValues, isShortChecked: !isShorts })
+      );
+    }
     setIsShorts(!isShorts);
   };
 

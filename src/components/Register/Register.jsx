@@ -16,8 +16,9 @@ function Register() {
   const onSubmit = async (values) => {
     try {
       const userData = await mainApi.signUp(values);
+      localStorage.clear();
       setUser(userData);
-      navigate('/movies', { replace: true });
+      navigate('/', { replace: true });
     } catch (e) {
       switch (e.message) {
         case '409': {
