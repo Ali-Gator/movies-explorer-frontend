@@ -8,6 +8,8 @@ https://movie.nomoredomains.sbs
 
 ## Final pull request
 
+https://github.com/Ali-Gator/movies-explorer-frontend/pull/2
+
 ## Todo
 
 - add react context to film data
