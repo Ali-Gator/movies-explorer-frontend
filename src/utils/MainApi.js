@@ -87,7 +87,7 @@ class MainApi {
         Authorization: `Bearer ${jwt}`
       },
       body: JSON.stringify({
-        country,
+        country: country || 'No data',
         director,
         duration,
         year,

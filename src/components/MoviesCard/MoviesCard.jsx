@@ -63,14 +63,16 @@ function MoviesCard({ movie }) {
       setCardStatus('delete');
     }
   }, []);
-
+  console.log(movie, movie.trailerLink);
   return isMovieDeleted ? null : (
     <div className='card'>
-      <img
-        src={`${image.url ? `${constants.IMG_URL}${image.url}` : `${image}`}`}
-        alt='Кадр из фильма'
-        className='card__image'
-      />
+      <a href={movie.trailerLink} target='_blank' rel='noreferrer'>
+        <img
+          src={`${image.url ? `${constants.IMG_URL}${image.url}` : `${image}`}`}
+          alt='Кадр из фильма'
+          className='card__image'
+        />
+      </a>
       <div className='card__caption'>
         <p className='card__title'>{nameRU}</p>
         <button
