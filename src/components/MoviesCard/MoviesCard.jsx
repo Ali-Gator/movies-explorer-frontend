@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './moviesCard.css';
+import { useLocation } from 'react-router-dom';
 import constants from '../../utils/constants';
 import { formattedDuration } from '../../utils/utils';
 import mainApi from '../../utils/MainApi';
@@ -7,24 +8,22 @@ import { InfoTooltipContext } from '../../contexts/InfoTooltipContext';
 
 function MoviesCard({ movie }) {
   const { setTooltip } = useContext(InfoTooltipContext);
-  const {
-    image: { url },
-    nameRU,
-    duration,
-    status,
-    id,
-    mongoId
-  } = movie;
+  const { image, nameRU, duration, status, id, mongoId } = movie;
   const [cardStatus, setCardStatus] = useState(status);
   const [newMongoId, setNewMongoId] = useState(mongoId);
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
+  const [isMovieDeleted, setIsMovieDeleted] = useState(false);
 
   const handleClick = async () => {
     try {
       if (cardStatus) {
-        await mainApi.deleteMovie(localStorage.getItem(constants.STORAGE.JWT), newMongoId);
+        await mainApi.deleteMovie(
+          localStorage.getItem(constants.STORAGE.JWT),
+          newMongoId || movie._id
+        );
         const savedMovies = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
         savedMovies.initialMovies.forEach((film) => {
-          if (film.id === id) {
+          if (film.id === id || film.id === movie.movieId) {
             // eslint-disable-next-line no-param-reassign
             delete film.status;
             // eslint-disable-next-line no-param-reassign
@@ -33,20 +32,23 @@ function MoviesCard({ movie }) {
         });
         localStorage.setItem(constants.STORAGE.MOVIES_DATA, JSON.stringify(savedMovies));
         setCardStatus(null);
+        if (isSavedMovieLocation) {
+          setIsMovieDeleted(true);
+        }
       } else {
         const { _id } = await mainApi.postMovie(localStorage.getItem(constants.STORAGE.JWT), movie);
         const savedMovies = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
         savedMovies.initialMovies.forEach((film) => {
           if (film.id === id) {
             // eslint-disable-next-line no-param-reassign
-            film.status = 'saved';
+            film.status = 'liked';
             // eslint-disable-next-line no-param-reassign
             film.mongoId = _id;
             setNewMongoId(_id);
           }
         });
         localStorage.setItem(constants.STORAGE.MOVIES_DATA, JSON.stringify(savedMovies));
-        setCardStatus('saved');
+        setCardStatus('liked');
       }
     } catch (e) {
       setTooltip({
@@ -56,14 +58,24 @@ function MoviesCard({ movie }) {
     }
   };
 
-  return (
+  useEffect(() => {
+    if (isSavedMovieLocation) {
+      setCardStatus('delete');
+    }
+  }, []);
+
+  return isMovieDeleted ? null : (
     <div className='card'>
-      <img src={`${constants.IMG_URL}/${url}`} alt='Кадр из фильма' className='card__image' />
+      <img
+        src={`${image.url ? `${constants.IMG_URL}${image.url}` : `${image}`}`}
+        alt='Кадр из фильма'
+        className='card__image'
+      />
       <div className='card__caption'>
         <p className='card__title'>{nameRU}</p>
         <button
           className={`card__like ${
-            cardStatus ? 'card__like_type_liked' : 'card__like_type_default'
+            cardStatus ? `card__like_type_${cardStatus}` : 'card__like_type_default'
           }`}
           type='button'
           aria-label='like, dislike or delete'

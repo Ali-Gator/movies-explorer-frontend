@@ -91,8 +91,7 @@ export const checkIsSavedMovies = (initMovies, savedMovies) => {
     if (savedMovie) {
       checkedMovies.push({
         ...initMovie,
-        status: 'saved',
-        // eslint-disable-next-line no-underscore-dangle
+        status: 'liked',
         mongoId: savedMovie._id
       });
     } else {

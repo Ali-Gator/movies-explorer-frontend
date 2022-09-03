@@ -92,11 +92,11 @@ class MainApi {
         duration,
         year,
         description,
-        image: `${constants.IMG_URL}/${image.url}`,
-        trailerLink: trailerLink || `${constants.IMG_URL}/${image.url}`,
+        image: `${constants.IMG_URL}${image.url}`,
+        trailerLink: trailerLink || `${constants.IMG_URL}${image.url}`,
         nameRU,
         nameEN: nameEN || 'No data',
-        thumbnail: `${constants.IMG_URL}/${image.url}`,
+        thumbnail: `${constants.IMG_URL}${image.url}`,
         movieId: id
       })
     });

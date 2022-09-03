@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './moviesCardList.css';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import constants from '../../utils/constants';
 import { calculateAddMovies, calculateMoviesToRender, useEvent } from '../../utils/utils';
@@ -7,6 +8,7 @@ import { calculateAddMovies, calculateMoviesToRender, useEvent } from '../../uti
 function MoviesCardList({ moviesToShow }) {
   const [moviesToRender, setMoviesToRender] = useState([]);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
 
   const handleShowMore = () => {
     setMoviesToRender((prevState) => [
@@ -19,14 +21,20 @@ function MoviesCardList({ moviesToShow }) {
 
   useEffect(() => {
     if (moviesToShow !== null) {
-      setMoviesToRender(calculateMoviesToRender(moviesToShow, screenWidth));
+      if (isSavedMovieLocation) {
+        setMoviesToRender(moviesToShow);
+      } else {
+        setMoviesToRender(calculateMoviesToRender(moviesToShow, screenWidth));
+      }
     }
   }, [screenWidth, moviesToShow]);
   return (
     <div className='card-list'>
       <div className='card-list__card-wrapper'>
         {moviesToRender &&
-          moviesToRender.map((movie) => <MoviesCard movie={movie} key={movie.id} />)}
+          moviesToRender.map((movie) => (
+            <MoviesCard movie={movie} key={movie.id || movie.movieId} />
+          ))}
         {moviesToShow?.length === 0 && moviesToShow !== null && (
           <p className='card-list__message'>{constants.MESSAGE.NO_MOVIE_FOUND}</p>
         )}

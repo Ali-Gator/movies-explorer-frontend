@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './searchForm.css';
+import { useLocation } from 'react-router-dom';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Preloader from '../Preloader/Preloader';
 import constants from '../../utils/constants';
@@ -15,6 +16,7 @@ function SearchForm({ setMoviesToShow }) {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const { setTooltip } = useContext(InfoTooltipContext);
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
 
   const handleSubmit = async (e) => {
     try {
@@ -31,20 +33,26 @@ function SearchForm({ setMoviesToShow }) {
         });
         return;
       }
-      const apiMovies = await moviesApi.getMovies();
-      const savedMovies = await mainApi.getSavedMovies(localStorage.getItem(constants.STORAGE.JWT));
-      const checkedMovies = checkIsSavedMovies(apiMovies, savedMovies);
-      setInitMovies([...checkedMovies]);
+      if (!isSavedMovieLocation) {
+        const apiMovies = await moviesApi.getMovies();
+        const savedMovies = await mainApi.getSavedMovies(
+          localStorage.getItem(constants.STORAGE.JWT)
+        );
+        const checkedMovies = checkIsSavedMovies(apiMovies, savedMovies);
+        setInitMovies([...checkedMovies]);
+        localStorage.setItem(
+          constants.STORAGE.MOVIES_DATA,
+          JSON.stringify({
+            searchQuery,
+            initialMovies: checkedMovies,
+            isShortChecked
+          })
+        );
+      } else {
+        setInitMovies([...initMovies]);
+      }
       setQuerySearch(searchQuery);
       setIsShorts(isShortChecked);
-      localStorage.setItem(
-        constants.STORAGE.MOVIES_DATA,
-        JSON.stringify({
-          searchQuery,
-          initialMovies: checkedMovies,
-          isShortChecked
-        })
-      );
     } catch {
       setMessage(constants.MESSAGE.BEATFILM_ERR);
     } finally {
@@ -53,15 +61,24 @@ function SearchForm({ setMoviesToShow }) {
   };
 
   useEffect(() => {
-    const moviesData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
-    if (moviesData?.initialMovies) {
-      const { searchQuery, initialMovies, isShortChecked } = moviesData;
-      setQuerySearch(searchQuery);
-      setInitMovies(initialMovies);
-      setIsShorts(isShortChecked);
-    } else {
-      setMessage(constants.MESSAGE.START_SEARCH);
-    }
+    (async () => {
+      if (isSavedMovieLocation) {
+        const savedMovies = await mainApi.getSavedMovies(
+          localStorage.getItem(constants.STORAGE.JWT)
+        );
+        setInitMovies(savedMovies);
+      } else {
+        const moviesData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+        if (moviesData?.initialMovies) {
+          const { searchQuery, initialMovies, isShortChecked } = moviesData;
+          setInitMovies(initialMovies);
+          setQuerySearch(searchQuery);
+          setIsShorts(isShortChecked);
+        } else {
+          setMessage(constants.MESSAGE.START_SEARCH);
+        }
+      }
+    })();
   }, []);
 
   useEffect(() => {
@@ -73,10 +90,15 @@ function SearchForm({ setMoviesToShow }) {
 
   useEffect(() => {
     if (initMovies !== null) {
-      const movieData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
-      if (movieData?.initialMovies.length > 0) {
-        const filteredMovies = filterMovies(movieData.initialMovies, querySearch, isShorts);
+      if (isSavedMovieLocation) {
+        const filteredMovies = filterMovies(initMovies, querySearch, isShorts);
         setMoviesToShow(filteredMovies);
+      } else {
+        const movieData = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+        if (movieData?.initialMovies.length > 0) {
+          const filteredMovies = filterMovies(movieData.initialMovies, querySearch, isShorts);
+          setMoviesToShow(filteredMovies);
+        }
       }
     }
   }, [isShorts]);
