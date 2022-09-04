@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './login.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Form from '../Form/Form';
 import logo from '../../images/logo.svg';
+import constants from '../../utils/constants';
+import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Login() {
-  const formData = {
-    title: 'Рады видеть!',
-    buttonText: 'Войти',
-    text: 'Ещё не зарегистрированы?',
-    linkText: 'Регистрация',
-    linkTo: '/signup',
-    inputsData: [
-      {
-        id: 'email',
-        label: 'E-mail',
-        type: 'email',
-        error: ''
-      },
-      {
-        id: 'password',
-        label: 'Пароль',
-        type: 'password',
-        error: ''
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const { setUser } = useContext(CurrentUserContext);
+  const formData = constants.LOGIN_FORM;
+
+  const onSubmit = async (values) => {
+    try {
+      const { token } = await mainApi.signIn(values);
+      localStorage.clear();
+      localStorage.setItem(constants.STORAGE.JWT, token);
+      const user = await mainApi.getUserInfo(token);
+      setUser(user);
+      navigate('/movies', { replace: true });
+    } catch (e) {
+      switch (e.message) {
+        case '401': {
+          setErrorMessage(constants.MESSAGE.WRONG_LOGIN_PASSWORD);
+          break;
+        }
+        default: {
+          setErrorMessage(constants.MESSAGE.SERVER_ERR);
+        }
       }
-    ]
+    }
   };
 
   return (
@@ -32,7 +39,12 @@ function Login() {
       <NavLink to='/' className='login__link'>
         <img src={logo} alt='Логотип: зеленый кружок' className='login__logo' />
       </NavLink>
-      <Form formData={formData} className='login__form' />
+      <Form
+        formData={formData}
+        className='login__form'
+        errorMessage={errorMessage}
+        onSubmit={onSubmit}
+      />
     </main>
   );
 }

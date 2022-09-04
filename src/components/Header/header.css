@@ -67,7 +67,7 @@
   content: '';
   border-radius: 6px;
   background-color: #F9F9F9;
-  background-image: url('../../images/account_icon.svg');
+  background-image: url('../../images/icon-account.svg');
   background-repeat: no-repeat;
   background-position: center;
 }

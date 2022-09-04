@@ -1,5 +1,4 @@
-import React from 'react';
-import Preloader from '../Preloader/Preloader';
+import React, { useState } from 'react';
 import Header from '../Header/Header';
 import './movies.css';
 import SearchForm from '../SearchForm/SearchForm';
@@ -7,15 +6,16 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function Movies() {
+  const [moviesToShow, setMoviesToShow] = useState(null);
+
   return (
     <div className='movies'>
-      <Header isInner />
+      <Header />
       <main>
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm setMoviesToShow={setMoviesToShow} />
+        <MoviesCardList moviesToShow={moviesToShow} />
       </main>
       <Footer />
-      {false && <Preloader />}
     </div>
   );
 }

@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './savedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
-import Preloader from '../Preloader/Preloader';
 
 function SavedMovies() {
+  const [moviesToShow, setMoviesToShow] = useState(null);
+
   return (
     <div className='saved-movies'>
-      <Header isInner />
+      <Header />
       <main>
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm setMoviesToShow={setMoviesToShow} />
+        <MoviesCardList moviesToShow={moviesToShow} />
       </main>
       <Footer />
-      {false && <Preloader />}
     </div>
   );
 }

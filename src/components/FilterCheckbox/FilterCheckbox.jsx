@@ -1,11 +1,33 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './filterCheckbox.css';
+import constants from '../../utils/constants';
 
-function FilterCheckbox() {
+function FilterCheckbox({ isShorts, setIsShorts }) {
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
+
+  const handleChange = () => {
+    if (!isSavedMovieLocation) {
+      const savedValues = JSON.parse(localStorage.getItem(constants.STORAGE.MOVIES_DATA));
+      localStorage.setItem(
+        constants.STORAGE.MOVIES_DATA,
+        JSON.stringify({ ...savedValues, isShortChecked: !isShorts })
+      );
+    }
+    setIsShorts(!isShorts);
+  };
+
   return (
     <div className='tumbler'>
       <label className='tumbler__label' htmlFor='short-tumbler'>
-        <input className='tumbler__checkbox' id='short-tumbler' type='checkbox' />
+        <input
+          className='tumbler__checkbox'
+          id='short-tumbler'
+          name='shorts'
+          type='checkbox'
+          checked={isShorts}
+          onChange={handleChange}
+        />
         <span className='tumbler__graphic' />
       </label>
       <p className='tumbler__caption'>Короткометражки</p>

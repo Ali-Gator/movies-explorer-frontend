@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import './moviesCardList.css';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import constants from '../../utils/constants';
+import { calculateAddMovies, calculateMoviesToRender, useEvent } from '../../utils/utils';
 
-function MoviesCardList() {
-  const [movieData, setMovieData] = useState(null);
+function MoviesCardList({ moviesToShow }) {
+  const [moviesToRender, setMoviesToRender] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const isSavedMovieLocation = useLocation().pathname === '/saved-movies';
+
+  const handleShowMore = () => {
+    setMoviesToRender((prevState) => [
+      ...prevState,
+      ...calculateAddMovies(moviesToShow, moviesToRender, screenWidth)
+    ]);
+  };
+
+  useEvent('resize', (e) => setScreenWidth(e.target.innerWidth));
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch('https://api.nomoreparties.co/beatfilm-movies');
-      const movies = await res.json();
-      const samples = new Array(5).fill(movies[0]);
-      setMovieData(samples);
-    })();
-  }, []);
-
+    if (moviesToShow !== null) {
+      if (isSavedMovieLocation) {
+        setMoviesToRender(moviesToShow);
+      } else {
+        setMoviesToRender(calculateMoviesToRender(moviesToShow, screenWidth));
+      }
+    }
+  }, [screenWidth, moviesToShow]);
   return (
     <div className='card-list'>
       <div className='card-list__card-wrapper'>
-        {movieData &&
-          movieData.map((movie) => (
-            <MoviesCard
-              imageUrl={`https://api.nomoreparties.co/${movie.image.url}`}
-              title={movie.nameRU}
-              duration={movie.duration}
-            />
+        {moviesToRender &&
+          moviesToRender.map((movie) => (
+            <MoviesCard movie={movie} key={movie.id || movie.movieId} />
           ))}
+        {moviesToShow?.length === 0 && moviesToShow !== null && (
+          <p className='card-list__message'>{constants.MESSAGE.NO_MOVIE_FOUND}</p>
+        )}
       </div>
-      <button className='card-list__button button' type='button'>
-        Ещё
-      </button>
+      {moviesToRender.length < moviesToShow?.length && (
+        <button className='card-list__button button' type='button' onClick={handleShowMore}>
+          Ещё
+        </button>
+      )}
     </div>
   );
 }

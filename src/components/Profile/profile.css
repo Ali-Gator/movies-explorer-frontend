@@ -48,6 +48,13 @@
   border: none;
 }
 
+.profile-form__input-error {
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 10px 0 0;
+  color: #EE3465;
+}
+
 .profile-form__buttons-wrapper {
   width: 100%;
   margin: 172px 0 0;
@@ -84,21 +91,24 @@
   background: #F8F8F8;
 }
 
+.profile-form__button_type_exit {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.23;
+  display: block;
+  margin: 16px auto 0;
+  padding: 0;
+  text-align: center;
+  color: #FF004D;
+  background: transparent;
+}
+
 .profile-form__error {
   font-size: 11px;
   line-height: 1.18;
   margin: 0;
   text-align: center;
   color: #FF004C;
-}
-
-.profile-form__link {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.23;
-  display: block;
-  margin: 16px 0 0;
-  color: #FF004D;
 }
 
 @media screen and (max-width: 1100px) {

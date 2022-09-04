@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './header.css';
 import logo from '../../images/logo.svg';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Header({ isInner = false }) {
+function Header() {
+  const { user } = useContext(CurrentUserContext);
+  const isAuth = Boolean(user?.email);
+
   return (
-    <header className={`header ${isInner && 'header_inner'}`}>
+    <header className={`header ${isAuth && 'header_inner'}`}>
       <NavLink to='/'>
         <img className='header__logo' alt='Логотип: зеленая снежинка' src={logo} />
       </NavLink>
       <nav className='header__nav'>
-        {isInner ? (
+        {isAuth ? (
           <>
             <input id='header__menu-toggle' type='checkbox' className='header__menu-toggle' />
             <label className='header__menu-btn' htmlFor='header__menu-toggle'>
@@ -18,27 +22,49 @@ function Header({ isInner = false }) {
             </label>
             <ul className='header__nav-list header__nav-list_inner'>
               <li className='header__nav-item header__nav-item_inner header__nav-item_hidable'>
-                <NavLink to='/' className='header__link header__link_inner link'>
+                <NavLink
+                  to='/'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
+                >
                   Главная
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
                   to='/movies'
-                  className='header__link header__link_inner header__link_inner-active link'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
                 >
                   Фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
-                <NavLink to='/saved-movies' className='header__link header__link_inner link'>
+                <NavLink
+                  to='/saved-movies'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner link`
+                  }
+                >
                   Сохранённые фильмы
                 </NavLink>
               </li>
               <li className='header__nav-item header__nav-item_inner'>
                 <NavLink
                   to='/profile'
-                  className='header__link header__link_inner header__nav-item_last link'
+                  className={({ isActive }) =>
+                    `${
+                      isActive && 'header__link_inner-active'
+                    } header__link header__link_inner header__nav-item_last link`
+                  }
                 >
                   Аккаунт
                 </NavLink>
