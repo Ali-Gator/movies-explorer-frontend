@@ -28,6 +28,7 @@ export function useFormWithValidation() {
         ...errors,
         [name]: constants.MESSAGE.EMAIL_ERR
       });
+      setIsValid(false);
     }
   };
 
@@ -48,7 +49,7 @@ export const filterMovies = (moviesArr, searchString, isShorts) => {
     const isInRussian = movie.nameRU?.toLowerCase().includes(searchString);
     const isInEnglish = movie.nameEN?.toLowerCase().includes(searchString);
     if (isShorts) {
-      return movie.duration <= 40 && (isInRussian || isInEnglish);
+      return movie.duration <= constants.MINUTES_SHORTS && (isInRussian || isInEnglish);
     }
     return isInRussian || isInEnglish;
   });

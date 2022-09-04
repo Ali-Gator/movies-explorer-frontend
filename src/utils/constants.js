@@ -37,6 +37,7 @@ const constants = {
   ADD_MOVIES_DESKTOP: 4,
   ADD_MOVIES_TABLET: 2,
   MINUTES_PER_HOUR: 60,
+  MINUTES_SHORTS: 40,
   REGISTER_FORM: {
     title: 'Добро пожаловать!',
     buttonText: 'Зарегистрироваться',

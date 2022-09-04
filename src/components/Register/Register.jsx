@@ -15,10 +15,13 @@ function Register() {
 
   const onSubmit = async (values) => {
     try {
-      const userData = await mainApi.signUp(values);
+      const { email, name, password } = values;
+      await mainApi.signUp(values);
+      const { token } = await mainApi.signIn({ email, password });
       localStorage.clear();
-      setUser(userData);
-      navigate('/', { replace: true });
+      localStorage.setItem(constants.STORAGE.JWT, token);
+      setUser({ email, name });
+      navigate('/movies', { replace: true });
     } catch (e) {
       switch (e.message) {
         case '409': {
